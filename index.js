@@ -2,13 +2,14 @@ import DOMHandler from "./src/dom-handler.js";
 import LoginPage from "./src/pages/login-page.js";
 import HomePage from "./src/pages/home-page.js";
 import { tokenKey } from "./src/config.js";
-import { getTasks } from "./src/services/task-sevices.js"
+import { getTasks } from "./src/services/task-sevices.js";
+import { login } from "./src/services/sessions-service.js";
 
 async function init() {
 	try {
 		const token = sessionStorage.getItem(tokenKey);
-		if (!token) return DOMHandler.load(LoginPage);
-	
+		if (!token) throw new Error();
+
 		const user = await getTasks();
 		console.log(user);
 		DOMHandler.load(HomePage);
@@ -18,5 +19,13 @@ async function init() {
 	}
 }
 
-sessionStorage.setItem(tokenKey, "L8Yk1U1N9rpPYCnRfs24XBrN");
-init()
+init();
+
+
+
+
+// sessionStorage.setItem(tokenKey, "8JkKjBXir7n13eLypzGbyULW2");
+// login({
+	// 	"email": "seb.terleira1204@mail.com",
+	// 	"password": "123456"
+	// }).then(() => init())
