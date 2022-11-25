@@ -32,16 +32,16 @@ function render() {
 				${loginError ? `<p class="text-center error-300">${loginError}</p>` : ""}
 					<button class="button button--primary">Login</button>
         </form>
-        <a href="#" class="block text-center js-signup-link">Create account</a>
-      </section>
-    </main>
-    `;
-}
+          <a href="#" class="block text-center js-signup-link">Create account</a>
+        </section>
+      </main>
+      `;
+  }
 
-function ListenSubmitForm() {
-	const form = document.querySelector(".js-login-form");
+  function ListenSubmitForm() {
+    const form = document.querySelector(".js-login-form");
 
-	form.addEventListener("submit", async (event) => {
+    form.addEventListener("submit", async (event) => {
 		try {
 			event.preventDefault();
 
@@ -54,6 +54,9 @@ function ListenSubmitForm() {
 
 			const user = await login(credentials);
       STORE.user = user;
+
+      // await STORE.fetchContacts();
+
 			DOMHandler.load(HomePage);
 		} catch (error) {
       this.state.loginError = error.message;
