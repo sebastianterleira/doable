@@ -56,7 +56,7 @@ function render() {
 			const user = await login(credentials);
       STORE.user = user;
 
-      // await STORE.fetchContacts();
+      await STORE.fetchTasks();
 
 			DOMHandler.load(HomePage);
 		} catch (error) {

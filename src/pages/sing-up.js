@@ -5,7 +5,7 @@ import { input } from "../components/input.js";
 import { createUser } from "../services/user-service.js"
 
 function render() {
-    const { CreateUserError } = this.state; 
+    const { createUserError } = this.state; 
     return `
     <main class="section">
       <section class="container">
@@ -29,7 +29,8 @@ function render() {
           required: true,
           value: "4321",
         })}
-				${CreateUserError ? `<p class="text-center error-300">${CreateUserError}</p>` : ""}
+
+				${createUserError ? `<p class="text-center error-300">${createUserError}</p>` : ""}
 					<button class="button button--primary">Create Account</button>
         </form>
       </section>
@@ -54,12 +55,13 @@ function listenerSingUp() {
       const user = await createUser(credentials);
       STORE.user = user
 
-      await STORE.fetchContacts();
+      await STORE.fetchTasks();
 
       DOMHandler.load(HomePage);
     } catch (error) {
-        this.state.CreateUserError = error.message;
-        DOMHandler.reload();
+      console.log(error)
+      this.state.createUserError = error.message;
+      DOMHandler.reload();
     }
 	});
 }
@@ -72,7 +74,7 @@ const CreateUser = {
 		listenerSingUp();
   },
   state: {
-    CreateUserError: null,
+    createUserError: null,
   },
 }
 

@@ -12,51 +12,47 @@ import { logout } from "./services/sessions-service.js";
 const initialContactables = [
   {
     id: 1,
-    name: "UNO",
-    number: 987654321,
-    email: "uno@mail.com",
-    relation: "Friends",
-    favorite: false,
+    title: "UNO",
+    due_date: "2022-11-25",
+    important: false,
+    completed: false,
+    user_id: 419,
     created_at: "2022-11-18T01:20:43.857Z",
     updated_at: "2022-11-18T01:20:43.857Z",
-    user_id: 419,
   },
   {
     id: 2,
-    name: "DOS",
-    number: 987654322,
-    email: "dos@mail.com",
-    relation: "Friends",
-    favorite: true,
-    created_at: "2022-11-18T01:21:09.917Z",
-    updated_at: "2022-11-18T01:21:09.917Z",
-    user_id: 419,
+    title: "DOS",
+    due_date: "2022-11-26",
+    important: false,
+    completed: false,
+    user_id: 420,
+    created_at: "2022-11-18T01:20:43.857Z",
+    updated_at: "2022-11-18T01:20:43.857Z",
   },
   {
     id: 3,
-    name: "TRES",
-    number: 987654323,
-    email: "tres@mail.com",
-    relation: "Friends",
-    favorite: false,
-    created_at: "2022-11-18T01:21:09.917Z",
-    updated_at: "2022-11-18T01:21:09.917Z",
-    user_id: 419,
+    title: "TRES",
+    due_date: "2022-11-27",
+    important: false,
+    completed: false,
+    user_id: 421,
+    created_at: "2022-11-18T01:20:43.857Z",
+    updated_at: "2022-11-18T01:20:43.857Z",
   },
   {
     id: 4,
-    name: "CUATRO",
-    number: 987654313,
-    email: "cuatro@mail.com",
-    relation: "Friends",
-    favorite: false,
-    created_at: "2022-11-18T01:21:09.917Z",
-    updated_at: "2022-11-18T01:21:09.917Z",
-    user_id: 419,
+    title: "CUATRO",
+    due_date: "2022-11-28",
+    important: false,
+    completed: false,
+    user_id: 422,
+    created_at: "2022-11-18T01:20:43.857Z",
+    updated_at: "2022-11-18T01:20:43.857Z",
   },
 ];
 
-async function fetchContacts() {
+async function fetchTasks() {
   this.contacts = await getTasks();
 }
 
@@ -74,63 +70,7 @@ function listenLogout() {
   });
 }
 
-function listenSubmit() {
-  const save = document.querySelector(".js-save-form");
-  const cancel = document.querySelector(".js-cancel-form");
-
-  cancel.addEventListener("click", async (event) => {
-    DOMHandler.load(HomePage);
-    STORE.edit = {};
-  });
-
-  save.addEventListener("click", async (event) => {
-    event.preventDefault();
-
-    const { name, number, email, favorite, relation } =
-      document.querySelector(".js-profile-form");
-    const data = {
-      name: name.value,
-      number: number.value,
-      email: email.value,
-      favorite: JSON.parse(favorite.value),
-      relation: relation.value,
-    };
-
-    try {
-      let newC;
-      if (STORE.edit.id) {
-        await editContact(data, STORE.edit.id);
-        data.id = STORE.edit.id;
-
-        let editableIndex = STORE.contacts.findIndex(
-          (item) => item.id === STORE.edit.id
-        );
-
-        STORE.contacts.splice(editableIndex, 1, data);
-      } else {
-        newC = await createContacts(data);
-        data.id = newC.id;
-        STORE.contacts.push(data);
-      }
-
-      DOMHandler.load(HomePage);
-      STORE.edit = {};
-    } catch (error) {
-      const errorName = JSON.parse(error.message).errors?.toString();
-      if (errorName === "Access denied") DOMHandler.load(LoginPage);
-      DOMHandler.reload();
-    }
-  });
-}
-
-function listenAddContact() {
-  const a = document.querySelector(".js-add-contact");
-  a.addEventListener("click", async (event) => {
-    DOMHandler.load(NewContact);
-  });
-}
-
-function listenContacts() {
+function listenTasks() {
   const ul = document.querySelector(".js-contacts ");
   ul &&
     ul.addEventListener("click", async (event) => {
@@ -152,11 +92,9 @@ const STORE = {
   edit: {},
   details: {},
   header: {},
-  fetchContacts,
+  fetchTasks,
   listenLogout,
-  listenSubmit,
-  listenAddContact,
-  listenContacts,
+  listenTasks,
 };
 
 export default STORE;
