@@ -3,6 +3,7 @@ import HomePage from "./home-page.js";
 import STORE from "../store.js";
 import { input } from "../components/input.js";
 import { login } from "../services/sessions-service.js";
+import CreateUser from "./sing-up.js";
 
 function render() {
     const { loginError } = this.state;
@@ -65,12 +66,21 @@ function render() {
 	});
 }
 
+function listenSingUp() {
+	const a = document.querySelector(".js-signup-link");
+
+  a.addEventListener("click", async (event) => {
+    DOMHandler.load(CreateUser);
+  });
+}
+
 const LoginPage = {
     toString() {
       return render.call(this);
     },
     addListeners() {
 			ListenSubmitForm.call(this);
+			listenSingUp();
 		},
     state: {
       loginError: null,
