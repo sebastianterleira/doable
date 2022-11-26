@@ -1,12 +1,17 @@
 import DOMHandler from "../dom-handler.js";
+import STORE from "../store.js";
 import LoginPage from "./login-page.js";
 import { logout } from "../services/sessions-service.js";
+import Header from "./layout/header.js";
 
 const HomePage = {
 	toString() {
+		const title = "Contactable";
+		STORE.header = { title };
+
 		return `
-			<h1>Home Page<h1>
-			<a class="text-center block mb-8 js-logout">Logout</a>
+			${Header}
+			
 			`
 		},
 	addListeners() {

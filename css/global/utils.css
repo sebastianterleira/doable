@@ -70,6 +70,10 @@
   flex-direction: column;
 }
 
+.flex-row {
+  flex-direction: row;
+}
+
 .wrap {
   flex-wrap: wrap;
 }
@@ -119,4 +123,28 @@
 
 .justify-between {
   justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-item__center {
+  align-items: center;
+}
+
+.item1 {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: center;
+  width: 101px;
+  height: 24px;
+}
+
+.item2 {
+  display: flex;
+  align-items: center;
+  width: 16px;
+  height: 16px;
 }
