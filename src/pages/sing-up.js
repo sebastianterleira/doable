@@ -3,10 +3,15 @@ import HomePage from "./home-page.js";
 import STORE from "../store.js";
 import { input } from "../components/input.js";
 import { createUser } from "../services/user-service.js"
+import LoginPage from "./login-page.js";
 
 function render() {
     const { createUserError } = this.state; 
     return `
+    <div class="container large-48 flex align-item__center bg-gray-100 mb-0.8">
+		<img src="assets/icons/{ doable }.svg" class="item1"/>
+    <a href="#" class="js-login-link item2 flex-direction__row-reverse">Login</a>
+    </div>
     <main class="section">
       <section class="container">
         <h1 class="heading heading--lg text-center mb-4">Sing Up</h1>
@@ -66,12 +71,21 @@ function listenerSingUp() {
 	});
 }
 
+function listenLogin() {
+	const a = document.querySelector(".js-login-link");
+
+  a.addEventListener("click", async (event) => {
+    DOMHandler.load(LoginPage);
+  });
+}
+
 const CreateUser = {
 	toString() {
     return render.call(this);
   },
   addListeners() {
 		listenerSingUp();
+    listenLogin();
   },
   state: {
     createUserError: null,

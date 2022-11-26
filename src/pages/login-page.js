@@ -8,6 +8,9 @@ import CreateUser from "./sing-up.js";
 function render() {
     const { loginError } = this.state;
     return `
+	<div class="container large-48 flex align-item__center bg-gray-100 mb-0.8">
+		<img src="assets/icons/{ doable }.svg" class="item1"/>
+    </div>
     <main class="section">
       <section class="container">
         <h1 class="heading heading--lg text-center mb-4">Login</h1>

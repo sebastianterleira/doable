@@ -4,6 +4,7 @@ import HomePage from "./src/pages/home-page.js";
 import { tokenKey } from "./src/config.js";
 import { getTasks } from "./src/services/task-sevices.js";
 import { login } from "./src/services/sessions-service.js";
+import STORE from "./src/store.js";
 
 async function init() {
 	try {
@@ -11,6 +12,8 @@ async function init() {
 		if (!token) throw new Error();
 
 		const user = await getTasks();
+
+		await STORE.fetchTasks();
 		console.log(user);
 		DOMHandler.load(HomePage);
 	} catch (error) {
