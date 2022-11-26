@@ -186,13 +186,13 @@
   outline: 0;
   box-shadow: var(--shadow-button--primary);
 
-  /* outline: 2px solid var(--primary-300);
-  outline-offset: 2px; */
+  outline: 2px solid var(--primary-300);
+  outline-offset: 2px;
 }
 
-/* .checkbox__input:active {
+.checkbox__input:active {
   box-shadow: none;
-} */
+}
 
 .radio-button__opt-group,
 .checkbox__opt-group {

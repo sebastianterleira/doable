@@ -24,6 +24,16 @@ function render() {
           </div>
         </div>
       </div>
+      <div class="flex align-item__center gap-12 mb-1.1">
+      <label class="overline pl-1">show</label>
+        <div class="checkbox ">
+          <input class="checkbox__input" type="checkbox" value="" id="check1" />
+          <label for="check1" class="pl-1">Only pending</label>
+          <input class="checkbox__input" type="checkbox" value="" id="check2" />
+          <label for="check2" class="pl-1">Only important</label>
+        </div>
+      </div>
+      
     </div>
   `;
 }
