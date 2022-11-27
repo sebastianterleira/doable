@@ -1,11 +1,9 @@
 import DOMHandler from "./dom-handler.js";
 import HomePage from "./pages/home-page.js";
 import LoginPage from "./pages/login-page.js";
-// import NewContact from "./pages/new-contact-page.js";
 import {
-	createTask,
+  createTask,
 	getTasks,
-	//   editContact,
 } from "./services/task-sevices.js";
 import { logout } from "./services/sessions-service.js";
 
@@ -53,7 +51,34 @@ const initialContactables = [
 ];
 
 async function fetchTasks() {
-  this.contacts = await getTasks();
+  this.tasks = await getTasks();
+}
+
+function listenSubmit() {
+  const save = document.querySelector(".js-save-form");
+
+  save.addEventListener("click", async (event) => {
+    event.preventDefault();
+
+    const { title, due_date } =
+      document.querySelector(".js-profile-form");
+      const data = {
+        title: title.value,
+        due_date: due_date.value,
+      };
+      try {
+        let newC;
+          newC = await createTask(data);
+          data.id = newC.id;
+          STORE.tasks.push(data);
+  
+        DOMHandler.load(HomePage);
+      } catch (error) {
+        const errorName = JSON.parse(error.message).errors?.toString();
+        if (errorName === "Access denied") DOMHandler.load(LoginPage);
+        DOMHandler.reload();
+      }
+  });
 }
 
 function listenLogout() {
@@ -70,31 +95,15 @@ function listenLogout() {
   });
 }
 
-function listenTasks() {
-  const ul = document.querySelector(".js-contacts ");
-  ul &&
-    ul.addEventListener("click", async (event) => {
-    event.preventDefault();
-    const editLink = event.target.closest("[data-id]");
-    if (!editLink) return;
-    const id = Number(editLink.dataset.id);
-
-    const contact = STORE.contacts.find((item) => item.id === id);
-      // console.log(contact);
-    STORE.edit = contact;
-    DOMHandler.load(NewContact);
-    });
-}
-
 const STORE = {
   user: null,
-  contacts: [],
+  tasks: [],
   edit: {},
   details: {},
   header: {},
   fetchTasks,
   listenLogout,
-  listenTasks,
+  listenSubmit,
 };
 
 export default STORE;
