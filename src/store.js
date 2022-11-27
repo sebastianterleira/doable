@@ -1,11 +1,8 @@
 import DOMHandler from "./dom-handler.js";
 import HomePage from "./pages/home-page.js";
 import LoginPage from "./pages/login-page.js";
-// import NewContact from "./pages/new-contact-page.js";
 import {
-	createTask,
 	getTasks,
-	//   editContact,
 } from "./services/task-sevices.js";
 import { logout } from "./services/sessions-service.js";
 
@@ -53,7 +50,7 @@ const initialContactables = [
 ];
 
 async function fetchTasks() {
-  this.contacts = await getTasks();
+  this.tasks = await getTasks();
 }
 
 function listenLogout() {
@@ -70,31 +67,15 @@ function listenLogout() {
   });
 }
 
-function listenTasks() {
-  const ul = document.querySelector(".js-contacts ");
-  ul &&
-    ul.addEventListener("click", async (event) => {
-    event.preventDefault();
-    const editLink = event.target.closest("[data-id]");
-    if (!editLink) return;
-    const id = Number(editLink.dataset.id);
-
-    const contact = STORE.contacts.find((item) => item.id === id);
-      // console.log(contact);
-    STORE.edit = contact;
-    DOMHandler.load(NewContact);
-    });
-}
-
 const STORE = {
   user: null,
-  contacts: [],
+  tasks: [],
   edit: {},
   details: {},
   header: {},
   fetchTasks,
   listenLogout,
-  listenTasks,
+  initialContactables
 };
 
 export default STORE;
