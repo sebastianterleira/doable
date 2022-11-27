@@ -2,7 +2,6 @@ import DOMHandler from "../dom-handler.js";
 import STORE from "../store.js";
 import LoginPage from "./login-page.js";
 import { input } from "../components/input.js";
-import { logout } from "../services/sessions-service.js";
 import { select } from "../components/select.js";
 import Header from "./layout/header.js";
 
@@ -12,12 +11,12 @@ import Header from "./layout/header.js";
 // const arr1 = select.selected === "Alphabetical (a-z)" ? rta : "";
 
 function renderTask(task) {
-  const rta = STORE.tasks.sort(function(a, b){
-    if(a.title.toLowerCase() < b.title.toLowerCase()) { return -1; }
-    if(a.title.toLowerCase() > b.title.toLowerCase()) { return 1; }
-    return 0;
-  })
-
+    const rta = STORE.tasks.sort(function(a, b){
+      if(a.title.toLowerCase() < b.title.toLowerCase()) { return -1; }
+      if(a.title.toLowerCase() > b.title.toLowerCase()) { return 1; }
+      return 0;
+    })
+    
   return`
     <li class="js-tasks">
       <div class="doable__info">
@@ -34,7 +33,7 @@ function render() {
       <div class="container js-task">
         <div class="margin-left-right">
       ${select({
-        selected: "Alphabetical (a-z)",
+        selected: "selected",
       })}
         </div>
       <div class="flex align-item__center gap-12 mb-1.1">
