@@ -2,6 +2,7 @@ import DOMHandler from "./dom-handler.js";
 import HomePage from "./pages/home-page.js";
 import LoginPage from "./pages/login-page.js";
 import {
+  createTask,
 	getTasks,
 } from "./services/task-sevices.js";
 import { logout } from "./services/sessions-service.js";
@@ -53,6 +54,33 @@ async function fetchTasks() {
   this.tasks = await getTasks();
 }
 
+function listenSubmit() {
+  const save = document.querySelector(".js-save-form");
+
+  save.addEventListener("click", async (event) => {
+    event.preventDefault();
+
+    const { title, due_date } =
+      document.querySelector(".js-profile-form");
+      const data = {
+        title: title.value,
+        due_date: due_date.value,
+      };
+      try {
+        let newC;
+          newC = await createTask(data);
+          data.id = newC.id;
+          STORE.tasks.push(data);
+  
+        DOMHandler.load(HomePage);
+      } catch (error) {
+        const errorName = JSON.parse(error.message).errors?.toString();
+        if (errorName === "Access denied") DOMHandler.load(LoginPage);
+        DOMHandler.reload();
+      }
+  });
+}
+
 function listenLogout() {
   const a = document.querySelector(".js-logout");
 
@@ -75,7 +103,7 @@ const STORE = {
   header: {},
   fetchTasks,
   listenLogout,
-  initialContactables
+  listenSubmit,
 };
 
 export default STORE;

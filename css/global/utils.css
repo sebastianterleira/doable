@@ -3,6 +3,10 @@
   background-color: var(--gray-100);
 }
 
+.bg-custom {
+  background-color: white;
+}
+
 .bg-primary-300 {
   background-color: var(--primary-300);
 }
@@ -141,6 +145,10 @@
   padding-left: 1.22rem;
 }
 
+.pl-0\.32 {
+  padding-left: 0.32rem;
+}
+
 .justify-between {
   justify-content: space-between;
 }
@@ -175,4 +183,14 @@
 
 .large-48 {
   height: 48px;
+}
+
+.margin-left-right {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.margin-left-right-10 {
+  margin-left: 10px;
+  margin-right: 10px;
 }

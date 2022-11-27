@@ -5,7 +5,7 @@ let arr = STORE.tasks;
 export function select({selected = "Alphabetical (a-z)"}) {
     return`
     <div class="flex align-item__center gap-12 mb-1.1">
-      <label for="sort" class="overline pl-1">sort</label>
+      <label for="sort" class="overline pl-0.32">sort</label>
     <div class="select">
       <div class="select__container">
         <select
